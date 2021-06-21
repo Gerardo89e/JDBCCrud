@@ -13,7 +13,7 @@ public class UseDept {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int choice =0;
-		DepartmentDAOImple imp= new DepartmentDAOImple();
+		EmployeeDAOImplOracle imp= new EmployeeDAOImplOracle();
 		do {
 			System.out.println("Choose an Option");
 			System.out.println("1. List a deprtment");
@@ -31,32 +31,71 @@ public class UseDept {
 			break;
 		}case 2: 
 		{
-			String QUERY = "insert into dept values(80, 'Marketing', 'Reston')";
+			Scanner scan=new Scanner(System.in);
+			/*System.out.println("Please insert the Employee Number: "); 
+			int deptId = scan.nextInt();
+			String deptSector = scan.nextLine();
+			String deptStuff = scan.nextLine();
+			String QUERY = "insert into dept values(?, ?, ?)";
+			*/
+			/*String QUERY = "insert into dept values(80, 'Marketing', 'Reston')";
 			System.out.println("Please insert the info: ");
 			Scanner scan=new Scanner(System.in);
 			int deptId = scan.nextInt();
 			String deptSector = scan.nextLine();
 			String deptStuff = scan.nextLine();
+			 */
+			//signleton to get the private constructor
+			Employee st= Employee.st.getInstance();
 
-			imp.insertNewDept(choice);
+			System.out.println("Enter New Department No.:");
+	          st.setDeptID(Integer.parseInt(scan.nextLine()));
+	          System.out.println("Enter New Department Name:");
+	          st.setDeptName(scan.nextLine());
+	          System.out.println("Enter New Department Location:");
+	          st.setDeptloc(scan.nextLine());
+			imp.addEmployee(st);
 			break;
 		}case 3:
-		{	int n= imp.udpateDept(null);
+		{
+			Scanner scan=new Scanner(System.in);
+
+			System.out.println("Enter The Department No. to update:");
+	          Employee sg=Employee.st.getInstance();
+	          System.out.println("Enter New Department Name:");
+	          String str;
+	          if (!(str = scan.nextLine()).equals("")) {
+	            sg.setDeptName(str);
+	          }
+	          System.out.println("Enter New Department Location:");
+	          if (!(str = scan.nextLine()).equals("")) {
+	            sg.setDeptloc(str);
+	          }
+	         /* if (EmployeeDAOImplOracle.updateEmployeeById(Integer.parseInt(scan.nextLine())) == Integer.parseInt(scan.nextLine())) {
+	            System.out.println("Update has been successful");
+	          }	*/
+	          imp.updateEmployeeById(Integer.parseInt(scan.nextLine()));
+
+		//int n= imp.updateEmployeeById(Integer.parseInt(scan.nextLine());
 		System.out.println("Row updated");
 		break;
 	}
 	case 4: 
 	{
-		int n=imp.deleteDept(null);
-		 System.out.println("Row deleted : "+n);
+		Scanner scan=new Scanner(System.in);
+
+		 System.out.println("Enter the Department No. to delete:");
+         int deptNo = Integer.parseInt(scan.nextLine());
+		 imp.deleteEmployeeById(deptNo);
+		// System.out.println("Row deleted : "+n);
 		break;
 	}
-	case 5: 
+	/*case 5: 
 	{
 		imp.useStoredProcedure();
 		 System.out.println("Row inserted using procedure");
 		break;
-	}	
+	}	*/
 		
 	}
 		}while(choice !=6);
