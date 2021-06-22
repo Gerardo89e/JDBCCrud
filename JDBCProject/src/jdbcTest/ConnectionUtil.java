@@ -14,7 +14,7 @@ public class ConnectionUtil {
 		FileInputStream fis = null;
 		Connection con = null;
 		try {
-			fis = new FileInputStream("JDBCProject/dp.properties");
+			fis = new FileInputStream("dp.properties");
 			//JDBCCrud/JDBCProject/dp.properties
 			props.load(fis);
 

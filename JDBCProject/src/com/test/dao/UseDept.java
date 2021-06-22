@@ -19,7 +19,7 @@ public class UseDept {
 			System.out.println("1. List a deprtment");
 			System.out.println("2. Add a deprtment");
 			System.out.println("3. Update a deprtment");
-			System.out.println("4. Delete a deprtment");
+			System.out.println("4. Delete an Employee");
 			System.out.println("5. Insert using StoredProcedure");
 			
 			Scanner sc=new Scanner(System.in);
@@ -87,8 +87,9 @@ public class UseDept {
 	{
 		Scanner scan=new Scanner(System.in);
 
-		 System.out.println("Enter the Department No. to delete:");
+		 System.out.println("Enter the Employee No. to delete:");
          int deptNo = Integer.parseInt(scan.nextLine());
+         
 		 imp.deleteEmployeeById(deptNo);
 		// System.out.println("Row deleted : "+n);
 		break;

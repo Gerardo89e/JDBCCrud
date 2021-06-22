@@ -68,15 +68,16 @@ public class EmployeeDAOImplOracle implements EmployeeDAO{
 		
 		@Override
 		public void deleteEmployeeById(int id) {
-			// TODO Auto-generated method stub
-			int row=0;
-		    String QUERY = "Delete from dept where deptno = ?";
-		    try (Connection conn = ConnectionUtil.getConnection();
-		            PreparedStatement preparedStatement = conn.prepareStatement(QUERY)) {
-		          preparedStatement.setInt(1,id);
-		          row = preparedStatement.executeUpdate();
+		    String QUERY = "Delete from emp where empno = ?";
+		    try (Connection conn = ConnectionUtil.getConnection();PreparedStatement stmt = conn.prepareStatement(QUERY)) {
+		          stmt.setInt(1,id);
+		          int row=stmt.executeUpdate();
+		          if(row>0) {
+			          System.out.println("it works");
+		          }
 		        } catch (SQLException e) {
 		          System.out.println("Row cannot be deleted");
+		          e.printStackTrace();
 		        }
 			//String QUERY = "Delete from dept where deptno = ?";
 		    /* 
@@ -126,24 +127,20 @@ public class EmployeeDAOImplOracle implements EmployeeDAO{
 
 		@Override
 		public void selectDept(int deptNo) {
-			// TODO Auto-generated method stub
 		    String QUERY = "select deptno, dname, loc from dept where deptno = ?";
-
-			//String QUERY = "select deptno,dname,loc from dept";
 		    try (Connection conn = ConnectionUtil.getConnection(); PreparedStatement stmt = conn.prepareStatement(QUERY)){
-		    	//Statement stmt1=conn.createStatement();
 		    	stmt.setInt(1, deptNo);
 		        ResultSet rs = stmt.executeQuery();
-		        if (rs.next()) {
-		          //Employee dept = Employee.st.getInstance();
-		          //dept.setDeptID(rs.getInt("deptNo"));
-		          //dept.setDeptName(rs.getString("dname"));
-		          //dept.setDeptloc(rs.getString("loc"));
-		          System.out.println("Connection");
-		            System.out.print("ID: " + rs.getInt(deptNo));
-		            System.out.println("After : " + stmt.toString());
+		        
+		        while (rs.next()) {
+		         Employee dept = Employee.st.getInstance();
+		          dept.setDeptID(rs.getInt("deptNo"));
+		         dept.setDeptName(rs.getString("dname"));
+		         dept.setDeptloc(rs.getString("loc"));
+		            System.out.print("ID: " + rs.getInt("deptNo"));
+		           // System.out.println("After : " + rs.getString(2));
 
-		          //System.out.println(dept.getDeptID() + "," +dept.getDeptName()+ "," +dept.getDeptLoc() );
+		          System.out.println(dept.getDeptID() + "," +dept.getDeptName()+ "," +dept.getDeptLoc() );
 		        }
 		      } catch (SQLException e) {
 		        System.out.println("Department cannot be found.");
