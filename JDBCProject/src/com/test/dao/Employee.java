@@ -4,9 +4,10 @@ public class Employee {
 	private int deptno;
 	private String deptname;
 	private String deptloc;
+	//singleton for grabbing private constructor
 	static Employee st= new Employee();
 	private Employee(){
-			
+		super();	
 	}
 	private Employee(int deptno,String deptloc, String name) {
 		super();

@@ -14,7 +14,8 @@ public class ConnectionUtil {
 		FileInputStream fis = null;
 		Connection con = null;
 		try {
-			fis = new FileInputStream("dp.properties");
+			fis = new FileInputStream("JDBCProject/dp.properties");
+			//JDBCCrud/JDBCProject/dp.properties
 			props.load(fis);
 
 			// load the Driver Class

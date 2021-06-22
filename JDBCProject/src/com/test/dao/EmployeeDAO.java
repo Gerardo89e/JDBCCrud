@@ -9,5 +9,5 @@ public interface EmployeeDAO {
 	  public void updateEmployeeById(int id);
 	  public void deleteEmployeeById(int id);
 	  public void addEmployee(Employee e);
-	  public void selectDept();
+	  public void selectDept(int deptNo);
 }

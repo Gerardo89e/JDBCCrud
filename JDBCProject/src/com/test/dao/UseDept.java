@@ -27,7 +27,10 @@ public class UseDept {
 		switch (choice) {
 		case 1:
 		{  
-			imp.selectDept();
+			Scanner scan=new Scanner(System.in);
+			System.out.println("Please insert the Employee Number: "); 
+			int deptId = scan.nextInt();
+			imp.selectDept(deptId);
 			break;
 		}case 2: 
 		{
