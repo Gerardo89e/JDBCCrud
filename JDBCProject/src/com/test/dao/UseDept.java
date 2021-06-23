@@ -16,7 +16,7 @@ public class UseDept {
 		EmployeeDAOImplOracle imp= new EmployeeDAOImplOracle();
 		do {
 			System.out.println("Choose an Option");
-			System.out.println("1. List a deprtment");
+			System.out.println("1. List a Employee");
 			System.out.println("2. Add a deprtment");
 			System.out.println("3. Update a deprtment");
 			System.out.println("4. Delete an Employee");
@@ -57,28 +57,35 @@ public class UseDept {
 	          st.setDeptName(scan.nextLine());
 	          System.out.println("Enter New Department Location:");
 	          st.setDeptloc(scan.nextLine());
+	          System.out.println(st.getDeptID()+""+st.getDeptName()+""+st.getDeptLoc());
 			imp.addEmployee(st);
 			break;
 		}case 3:
 		{
 			Scanner scan=new Scanner(System.in);
-
-			System.out.println("Enter The Department No. to update:");
 	          Employee sg=Employee.st.getInstance();
+			System.out.println("Enter The Department No. to update:");
+	          int deptNo=scan.nextInt();
 	          System.out.println("Enter New Department Name:");
-	          String str;
+	          String str=scan.nextLine();
+	          scan.next();
+	          System.out.println("Enter New Department Location:");
+	          String str2=scan.nextLine();
+	          //3
+	          scan.nextLine();
+	          
 	          if (!(str = scan.nextLine()).equals("")) {
 	            sg.setDeptName(str);
+	            
 	          }
-	          System.out.println("Enter New Department Location:");
-	          if (!(str = scan.nextLine()).equals("")) {
+	          if (!(str2 = scan.nextLine()).equals("")) {
 	            sg.setDeptloc(str);
 	          }
 	         /* if (EmployeeDAOImplOracle.updateEmployeeById(Integer.parseInt(scan.nextLine())) == Integer.parseInt(scan.nextLine())) {
 	            System.out.println("Update has been successful");
 	          }	*/
-	          imp.updateEmployeeById(Integer.parseInt(scan.nextLine()));
-
+	          imp.updateEmployeeById(deptNo);
+	          //imp.updateEmployeeById(deptNo);
 		//int n= imp.updateEmployeeById(Integer.parseInt(scan.nextLine());
 		System.out.println("Row updated");
 		break;

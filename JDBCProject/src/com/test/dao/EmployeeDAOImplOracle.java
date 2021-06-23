@@ -42,13 +42,18 @@ public class EmployeeDAOImplOracle implements EmployeeDAO{
 		public void updateEmployeeById(int id) {
 			// TODO Auto-generated method stub
 			int row=0;
-		    String QUERY = "UPDATE dept SET dname=? WHERE deptno=?";
+		    String QUERY = "UPDATE dept SET dname=?  loc=? WHERE deptno=?";
+			//String QUERY = "UPDATE dept SET dname='ITS80' WHERE deptno=?";
+
 		    Employee empt=Employee.st.getInstance();
 		    try (Connection conn = ConnectionUtil.getConnection(); PreparedStatement stmt = conn.prepareStatement(QUERY)) {
 		        stmt.setString(1, empt.getDeptName());
 		        stmt.setInt(2,empt.getDeptID());
 		        row = stmt.executeUpdate();
-		      } catch (SQLException e) {
+		        if(row>0) {
+			          System.out.println("it works");
+		          }
+		    } catch (SQLException e) {
 		        System.out.println("Row cannot be updated");
 		      }
 			//String QUERY = "UPDATE dept SET dname='ITS80' WHERE deptno=?";
@@ -99,18 +104,21 @@ public class EmployeeDAOImplOracle implements EmployeeDAO{
 		@Override
 		public void addEmployee(Employee e) {
 			// TODO Auto-generated method stub
-		    String QUERY = "insert into dept_jdbc values(?,?,?)";
-			//String QUERY = "insert into dept values(80, 'Marketing', 'Reston')";
+		    String QUERY = "insert into dept values(?,?,?)";
+	          //System.out.println(e.getDeptID()+""+e.getDeptName()+""+e.getDeptLoc());
+
+		    //String QUERY = "insert into dept values(80, 'Marketing', 'Reston')";
 		    try (Connection con = ConnectionUtil.getConnection(); PreparedStatement stmt = con.prepareStatement(QUERY)) {
-					//Statement stmt1 = con.createStatement();
-				 //int result = stmt1.executeUpdate(QUERY);
-		    	 stmt.setInt(1,e.getDeptID());
+
+		         stmt.setInt(1,e.getDeptID());
 		         stmt.setString(2, e.getDeptName());
 		         stmt.setString(3, e.getDeptLoc());
 		         int result = stmt.executeUpdate();
+
 		         if (result == 1) {
 		             System.out.println("update succesfull");
-		           }
+		          }
+		         
 		         } catch (SQLException e1) {
 		           e1.printStackTrace();
 		         } catch (NumberFormatException e1) {
